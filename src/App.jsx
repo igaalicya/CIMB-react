@@ -9,6 +9,8 @@ import Educated from './images/educated.png'
 
 import CounterScreen from './views/screens/CounterScreen';
 import InputScreen from './views/screens/InputScreen';
+import AuthScreen from './views/screens/AuthScreen';
+import "./bootstrap.css";
 function App() {
 
   let arrBooks = [
@@ -69,7 +71,8 @@ function App() {
             {renderBooks()}
         </div> */}
         {/* <CounterScreen/> */}
-        <InputScreen/>
+        {/* <InputScreen/> */}
+        <AuthScreen/>
       </div>
     )
 
