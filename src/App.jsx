@@ -7,6 +7,8 @@ import Crazy from './images/crazyRich.png'
 import Brave from './images/brave.png'
 import Educated from './images/educated.png'
 
+import CounterScreen from './views/screens/CounterScreen';
+import InputScreen from './views/screens/InputScreen';
 function App() {
 
   let arrBooks = [
@@ -62,10 +64,12 @@ function App() {
 
     return (
       <div className="App">
-        <h1 className="p-5 font-weight-bolder text-primary">Toko Buku Purwadhika</h1>
+        {/* <h1 className="p-5 font-weight-bolder text-primary">Toko Buku Purwadhika</h1>
         <div className="row offset-md-1">
             {renderBooks()}
-        </div>
+        </div> */}
+        {/* <CounterScreen/> */}
+        <InputScreen/>
       </div>
     )
 
