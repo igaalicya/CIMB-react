@@ -1,4 +1,6 @@
 import React from 'react';
+import {BrowserRouter, Route, Switch} from 'react-router-dom'
+
 import logo from './logo.svg';
 import './App.css';
 import BooksData from './views/components/BooksData';
@@ -9,8 +11,11 @@ import Educated from './images/educated.png'
 
 import CounterScreen from './views/screens/CounterScreen';
 import InputScreen from './views/screens/InputScreen';
-import AuthScreen from './views/screens/AuthScreen';
+// import AuthScreen from './views/screens/AuthScreen';
+import AuthScreen from './views/screens/AuthScreenV2';
 import "./bootstrap.css";
+import LifecycleScreen from './views/screens/LifecycleScreen';
+import HomeScreen from './views/screens/HomeScreen';
 function App() {
 
   let arrBooks = [
@@ -65,15 +70,25 @@ function App() {
     }
 
     return (
-      <div className="App">
-        {/* <h1 className="p-5 font-weight-bolder text-primary">Toko Buku Purwadhika</h1>
-        <div className="row offset-md-1">
-            {renderBooks()}
-        </div> */}
-        {/* <CounterScreen/> */}
-        {/* <InputScreen/> */}
-        <AuthScreen/>
-      </div>
+      // <div className="App">
+      //   <h1 className="p-5 font-weight-bolder text-primary">Toko Buku Purwadhika</h1>
+      //   <div className="row offset-md-1">
+      //       {renderBooks()}
+      //   </div>
+      //   <CounterScreen/>
+      //   <InputScreen/>
+      //   <AuthScreen/>
+      //   <LifecycleScreen/>
+      // </div>
+      <BrowserRouter>
+        <Switch>
+          <Route path="/home" component={HomeScreen} />
+          <Route path="/counter" component={CounterScreen} />
+          <Route path="/input" component={InputScreen} />
+          <Route path="/auth" component={AuthScreen} />
+          <Route path="/lifecycle" component={LifecycleScreen} />
+        </Switch>
+      </BrowserRouter>
     )
 
 }

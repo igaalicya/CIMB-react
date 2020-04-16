@@ -18,7 +18,7 @@ const TableProduct = () => {
     }
     return (
         <div>
-            <table align="center">
+            <table className="table-bordered" align="center">
                 <thead>
                     <tr>
                         <th>No</th>
