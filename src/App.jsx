@@ -1,26 +1,25 @@
-import React from 'react';
-import {BrowserRouter, Route, Switch, withRouter} from 'react-router-dom'
+import React from "react";
+import { BrowserRouter, Route, Switch, withRouter } from "react-router-dom";
 
-import logo from './logo.svg';
-import './App.css';
-import BooksData from './views/components/BooksData';
-import Handmaid from './images/handmaid.png'
-import Crazy from './images/crazyRich.png'
-import Brave from './images/brave.png'
-import Educated from './images/educated.png'
+import logo from "./logo.svg";
+import "./App.css";
+import BooksData from "./views/components/BooksData";
+import Handmaid from "./images/handmaid.png";
+import Crazy from "./images/crazyRich.png";
+import Brave from "./images/brave.png";
+import Educated from "./images/educated.png";
 
-import CounterScreen from './views/screens/CounterScreen';
-import InputScreen from './views/screens/InputScreen';
+import CounterScreen from "./views/screens/CounterScreen";
+import InputScreen from "./views/screens/InputScreen";
 // import AuthScreen from './views/screens/AuthScreen';
-import AuthScreen from './views/screens/AuthScreenV2';
+import AuthScreen from "./views/screens/AuthScreenV2";
 import "./bootstrap.css";
-import LifecycleScreen from './views/screens/LifecycleScreen';
-import HomeScreen from './views/screens/HomeScreen';
-import PageNotFound from './views/screens/PageNotFound';
-import Navbar from './views/components/Navbar';
-import ProfileScreen from './views/screens/ProfileScreen';
+import LifecycleScreen from "./views/screens/LifecycleScreen";
+import HomeScreen from "./views/screens/HomeScreen";
+import PageNotFound from "./views/screens/PageNotFound";
+import Navbar from "./views/components/Navbar";
+import ProfileScreen from "./views/screens/ProfileScreen";
 function App() {
-
   let arrBooks = [
     {
       author: "Margaret Atwood",
@@ -30,7 +29,7 @@ function App() {
       price: 18.99,
       discount: 60,
       image: Handmaid,
-      stock: 7,
+      stock: 7
     },
     {
       author: "Kevin Kwan",
@@ -40,7 +39,7 @@ function App() {
       price: 24.12,
       discount: 80,
       image: Crazy,
-      stock: 0,
+      stock: 0
     },
     {
       author: "Aldous Huxley",
@@ -50,7 +49,7 @@ function App() {
       price: 18.99,
       discount: 60,
       image: Brave,
-      stock: 3,
+      stock: 3
     },
     {
       author: "Tara Westover",
@@ -60,46 +59,59 @@ function App() {
       price: 34.21,
       discount: 0,
       image: Educated,
-      stock: 3,
-    },
+      stock: 3
+    }
   ];
 
-    const renderBooks = () => {
-      return arrBooks.map((val) => {
-        return(
-          <BooksData daftarBuku={val}/>
-        )
-      })
-    }
+  const renderBooks = () => {
+    return arrBooks.map(val => {
+      return <BooksData daftarBuku={val} />;
+    });
+  };
 
-    return (
-      // <div className="App">
-      //   <h1 className="p-5 font-weight-bolder text-primary">Toko Buku Purwadhika</h1>
-      //   <div className="row offset-md-1">
-      //       {renderBooks()}
-      //   </div>
-      //   <CounterScreen/>
-      //   <InputScreen/>
-      //   <AuthScreen/>
-      //   <LifecycleScreen/>
-      // </div>
-      <>
-        {/* yang diletakkan di dalam Browser Router akan muncul di semua screen */}
-        {/* <LifecycleScreen/> */}
-        <Navbar/>
-        <Switch>
-          <Route exact path="/" component={HomeScreen} />
-          <Route exact path="/counter" component={CounterScreen} />
-          <Route exact path="/input" component={InputScreen} />
-          <Route exact path="/auth" component={AuthScreen} />
-          {/* setelah : adalah parameter yang bebas diisi apa aja */}
-          <Route exact path="/profile/:username" component={ProfileScreen} />
-          {/* <Route path="/lifecycle" component={LifecycleScreen} /> */}
-          <Route path="*" component={PageNotFound} />
-        </Switch>
-      </>
-    )
-
+  return (
+    // <div className="App">
+    //   <h1 className="p-5 font-weight-bolder text-primary">Toko Buku Purwadhika</h1>
+    //   <div className="row offset-md-1">
+    //       {renderBooks()}
+    //   </div>
+    //   <CounterScreen/>
+    //   <InputScreen/>
+    //   <AuthScreen/>
+    //   <LifecycleScreen/>
+    // </div>
+    <>
+      {/* yang diletakkan di dalam Browser Router akan muncul di semua screen */}
+      {/* <LifecycleScreen/> */}
+      <Navbar />
+      <Switch>
+        <Route exact path="/" component={HomeScreen} />
+        <Route exact path="/counter" component={CounterScreen} />
+        <Route exact path="/input" component={InputScreen} />
+        <Route exact path="/auth" component={AuthScreen} />
+        {/* setelah : adalah parameter yang bebas diisi apa aja */}
+        <Route exact path="/profile/:username" component={ProfileScreen} />
+        {/* <Route path="/lifecycle" component={LifecycleScreen} /> */}
+        {/* 
+            user list
+            login screen
+              - get user sesuai username + password
+              - user ada -> redirect ke profile user
+              - user tidak ada / salah pass -> alert "user tidak ditemukan/ pass salah"
+            register screen
+              - post user baru ke db.json
+              - username harus unik
+              - data (username, fullname, password, role)
+            Profile Screen
+              - ketika masuk screen langsung
+                GET data user melalui route param (isi params bisa username atau id)
+              - gunakan Lifecycle Method componentDidMount
+              - tampilkan username, fullName, dan role user tsb
+          */}
+        <Route path="*" component={PageNotFound} />
+      </Switch>
+    </>
+  );
 }
 
 export default withRouter(App);
