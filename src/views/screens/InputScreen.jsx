@@ -1,4 +1,5 @@
 import React from 'react'
+import {Link} from 'react-router-dom'
 
 class InputScreen extends React.Component{
     
@@ -20,6 +21,10 @@ class InputScreen extends React.Component{
                 <h1>Input Screen</h1>
                 <h3>Username: {username} </h3>
                 <h3>Email: {email}</h3>
+                <Link to={"/profile/" + username}>
+                    <input className="btn btn-primary" type="button" value="Login" onClick="/profile/{username}"/>
+                </Link>
+                <br/>
                 {/* onChange ={(e)=> inputHandler(e)} */}
                 {/* onChange={inputHandler} */}
                 <input onChange ={(e)=> inputHandler(e, "username")} type="text" placeholder="Username"/>

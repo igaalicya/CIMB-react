@@ -1,0 +1,14 @@
+{
+    "posts": [],
+    "comments": [],
+    "users": [
+        {
+            "id": 1,
+            "username": "admin",
+            "password": "password",
+            "fullName": "Admin 123",
+            "role": "admin"
+        }
+    ]
+}
+  

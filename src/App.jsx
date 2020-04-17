@@ -1,5 +1,5 @@
 import React from 'react';
-import {BrowserRouter, Route, Switch} from 'react-router-dom'
+import {BrowserRouter, Route, Switch, withRouter} from 'react-router-dom'
 
 import logo from './logo.svg';
 import './App.css';
@@ -16,6 +16,9 @@ import AuthScreen from './views/screens/AuthScreenV2';
 import "./bootstrap.css";
 import LifecycleScreen from './views/screens/LifecycleScreen';
 import HomeScreen from './views/screens/HomeScreen';
+import PageNotFound from './views/screens/PageNotFound';
+import Navbar from './views/components/Navbar';
+import ProfileScreen from './views/screens/ProfileScreen';
 function App() {
 
   let arrBooks = [
@@ -80,17 +83,23 @@ function App() {
       //   <AuthScreen/>
       //   <LifecycleScreen/>
       // </div>
-      <BrowserRouter>
+      <>
+        {/* yang diletakkan di dalam Browser Router akan muncul di semua screen */}
+        {/* <LifecycleScreen/> */}
+        <Navbar/>
         <Switch>
-          <Route path="/home" component={HomeScreen} />
-          <Route path="/counter" component={CounterScreen} />
-          <Route path="/input" component={InputScreen} />
-          <Route path="/auth" component={AuthScreen} />
-          <Route path="/lifecycle" component={LifecycleScreen} />
+          <Route exact path="/" component={HomeScreen} />
+          <Route exact path="/counter" component={CounterScreen} />
+          <Route exact path="/input" component={InputScreen} />
+          <Route exact path="/auth" component={AuthScreen} />
+          {/* setelah : adalah parameter yang bebas diisi apa aja */}
+          <Route exact path="/profile/:username" component={ProfileScreen} />
+          {/* <Route path="/lifecycle" component={LifecycleScreen} /> */}
+          <Route path="*" component={PageNotFound} />
         </Switch>
-      </BrowserRouter>
+      </>
     )
 
 }
 
-export default App;
+export default withRouter(App);
