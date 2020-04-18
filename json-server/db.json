@@ -22,6 +22,20 @@
       "role": "admin",
       "fullName": "Bill Gates",
       "id": 3
+    },
+    {
+      "username": "iga",
+      "password": "123",
+      "role": "user",
+      "fullName": "iga cantik",
+      "id": 4
+    },
+    {
+      "username": "ica",
+      "password": "123",
+      "role": "admin",
+      "fullName": "ica caaa",
+      "id": 5
     }
   ]
 }

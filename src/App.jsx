@@ -19,6 +19,10 @@ import HomeScreen from "./views/screens/HomeScreen";
 import PageNotFound from "./views/screens/PageNotFound";
 import Navbar from "./views/components/Navbar";
 import ProfileScreen from "./views/screens/ProfileScreen";
+import RegisterScreen from "./views/screens/RegisterScreen";
+import LoginScreen from "./views/screens/LoginScreen";
+import ProfileUser from "./views/screens/profileUser";
+
 function App() {
   let arrBooks = [
     {
@@ -89,6 +93,9 @@ function App() {
         <Route exact path="/counter" component={CounterScreen} />
         <Route exact path="/input" component={InputScreen} />
         <Route exact path="/auth" component={AuthScreen} />
+        <Route exact path="/register" component={RegisterScreen} />
+        <Route exact path="/login" component={LoginScreen} />
+        <Route exact path="/profileUser/:username" component={ProfileUser} />
         {/* setelah : adalah parameter yang bebas diisi apa aja */}
         <Route exact path="/profile/:username" component={ProfileScreen} />
         {/* <Route path="/lifecycle" component={LifecycleScreen} /> */}
