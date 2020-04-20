@@ -2,6 +2,7 @@ import React from "react";
 import { Link, Redirect } from "react-router-dom";
 import Axios from "axios";
 import { API_URL } from "../../constant/API";
+import { Spinner } from "reactstrap";
 
 class RegisterScreen extends React.Component {
   state = {
@@ -11,7 +12,8 @@ class RegisterScreen extends React.Component {
     fullName: "",
     password: "",
     repPassword: "",
-    role: ""
+    role: "",
+    isLoading: false
   };
 
   inputHandler = (e, field) => {
@@ -19,6 +21,7 @@ class RegisterScreen extends React.Component {
   };
 
   registerHandler = () => {
+    this.setState({ isLoading: true });
     const {
       repPassword,
       password,
@@ -27,44 +30,52 @@ class RegisterScreen extends React.Component {
       lastName,
       role
     } = this.state;
-    Axios.get(`${API_URL}/users`, {
-      params: {
-        username: username
-      }
-    })
-      .then(res => {
-        if (res.data.length == 0) {
-          if (password == repPassword) {
-            Axios.post(`${API_URL}/users`, {
-              username: username,
-              password: password,
-              role: role,
-              fullName: firstName + " " + lastName
-            })
-              .then(res => {
-                alert("Registrasi akun berhasil");
-                this.setState({
-                  username: "",
-                  password: "",
-                  repPassword: "",
-                  role: "",
-                  firstName: "",
-                  lastName: ""
-                });
-              })
-              .catch(err => {
-                alert("Password yang dimasukkan tidak sama");
-              });
-          } else {
-            alert("Password yang dimasukkan tidak sama");
-          }
-        } else {
-          alert(`username ${username} telah digunakan`);
+
+    setTimeout(() => {
+      Axios.get(`${API_URL}/users`, {
+        params: {
+          username: username
         }
       })
-      .catch(err => {
-        alert(`username ${username} telah digunakan`);
-      });
+        .then(res => {
+          if (res.data.length == 0) {
+            if (password == repPassword) {
+              Axios.post(`${API_URL}/users`, {
+                username: username,
+                password: password,
+                role: role,
+                fullName: firstName + " " + lastName
+              })
+                .then(res => {
+                  alert("Registrasi akun berhasil");
+                  this.setState({ isLoading: false });
+                  this.setState({
+                    username: "",
+                    password: "",
+                    repPassword: "",
+                    role: "",
+                    firstName: "",
+                    lastName: ""
+                  });
+                })
+                .catch(err => {
+                  alert("Password yang dimasukkan tidak sama");
+                  this.setState({ isLoading: false });
+                });
+            } else {
+              alert("Password yang dimasukkan tidak sama");
+              this.setState({ isLoading: false });
+            }
+          } else {
+            alert(`username ${username} telah digunakan`);
+            this.setState({ isLoading: false });
+          }
+        })
+        .catch(err => {
+          alert(`username ${username} telah digunakan`);
+          this.setState({ isLoading: false });
+        });
+    }, 1000);
   };
 
   render() {
@@ -130,8 +141,10 @@ class RegisterScreen extends React.Component {
               value="Register"
               className="btn btn-primary mt-3"
               onClick={this.registerHandler}
+              disabled={this.state.isLoading}
             />
           </div>
+          <Spinner color="primary" />
         </center>
       </div>
     );

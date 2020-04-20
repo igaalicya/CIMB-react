@@ -1,5 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { connect } from "react-redux";
 
 class Navbar extends React.Component {
   render() {
@@ -17,4 +18,10 @@ class Navbar extends React.Component {
   }
 }
 
-export default Navbar;
+const mapStateToProps = state => {
+  return {
+    todo: state.todo
+  };
+};
+
+export default connect(mapStateToProps)(Navbar);
