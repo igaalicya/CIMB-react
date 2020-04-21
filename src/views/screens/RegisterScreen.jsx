@@ -3,6 +3,7 @@ import { Link, Redirect } from "react-router-dom";
 import Axios from "axios";
 import { API_URL } from "../../constant/API";
 import { Spinner } from "reactstrap";
+import swal from "sweetalert";
 
 class RegisterScreen extends React.Component {
   state = {
@@ -47,7 +48,7 @@ class RegisterScreen extends React.Component {
                 fullName: firstName + " " + lastName
               })
                 .then(res => {
-                  alert("Registrasi akun berhasil");
+                  swal("Berhasil", "Registrasi akun berhasil", "success");
                   this.setState({ isLoading: false });
                   this.setState({
                     username: "",
@@ -59,20 +60,20 @@ class RegisterScreen extends React.Component {
                   });
                 })
                 .catch(err => {
-                  alert("Password yang dimasukkan tidak sama");
+                  swal("Gagal", "Password yang dimasukkan tidak sama", "error");
                   this.setState({ isLoading: false });
                 });
             } else {
-              alert("Password yang dimasukkan tidak sama");
+              swal("Gagal", "Password yang dimasukkan tidak sama", "error");
               this.setState({ isLoading: false });
             }
           } else {
-            alert(`username ${username} telah digunakan`);
+            swal("Gagal", `username ${username} telah digunakan`, "error");
             this.setState({ isLoading: false });
           }
         })
         .catch(err => {
-          alert(`username ${username} telah digunakan`);
+          swal("Gagal", `username ${username} telah digunakan`, "error");
           this.setState({ isLoading: false });
         });
     }, 1000);
@@ -144,7 +145,7 @@ class RegisterScreen extends React.Component {
               disabled={this.state.isLoading}
             />
           </div>
-          <Spinner color="primary" />
+          {/* <Spinner color="primary" /> */}
         </center>
       </div>
     );

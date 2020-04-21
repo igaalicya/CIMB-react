@@ -36,6 +36,41 @@
       "role": "admin",
       "fullName": "ica caaa",
       "id": 5
+    },
+    {
+      "username": "vita",
+      "password": "123",
+      "role": "admin",
+      "fullName": "vita taaa",
+      "id": 6
+    },
+    {
+      "username": "vita2",
+      "password": "123",
+      "role": "admin",
+      "fullName": "vitaaa taaaa",
+      "id": 7
+    },
+    {
+      "username": "igaa",
+      "password": "123",
+      "role": "admin",
+      "fullName": "iga alicya",
+      "id": 8
+    },
+    {
+      "username": "igaaa",
+      "password": "123",
+      "role": "admina",
+      "fullName": "iga alicya",
+      "id": 9
+    },
+    {
+      "username": "cantika",
+      "password": "123",
+      "role": "admin",
+      "fullName": "Abigail Cantika",
+      "id": 10
     }
   ]
 }

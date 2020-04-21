@@ -1,6 +1,12 @@
 import React from "react";
 import Axios from "axios";
 import { API_URL } from "../../constant/API";
+import { connect } from "react-redux";
+import {
+  todoInputHandler,
+  usernameInputHandler,
+  addTodoInputHandler
+} from "../../redux/actions";
 
 class ProfileUser extends React.Component {
   state = {
@@ -46,4 +52,15 @@ class ProfileUser extends React.Component {
   }
 }
 
-export default ProfileUser;
+// export default ProfileUser;
+const mapStateToProps = state => {
+  return {
+    user: state.user
+  };
+};
+
+const mapDispatchToProps = {
+  onChangeUsername: usernameInputHandler
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(ProfileUser);

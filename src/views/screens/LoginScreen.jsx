@@ -3,6 +3,8 @@ import { Link, Redirect } from "react-router-dom";
 import Axios from "axios";
 import { API_URL } from "../../constant/API";
 import swal from "sweetalert";
+import { connect } from "react-redux";
+import { usernameHandler } from "../../redux/actions";
 
 class LoginScreen extends React.Component {
   state = {
@@ -32,23 +34,21 @@ class LoginScreen extends React.Component {
       }
     })
       .then(res => {
-        for (let i = 0; i < res.data.length; i++) {
-          if (
-            res.data[i].username == loginUsername &&
-            res.data[i].password == loginPassword
-          ) {
-            swal("Success!", "Berhasil Login", "success");
-            this.setState({
-              isLoggedIn: true,
-              currentUsername: res.data[i].username,
-              loginUsername: "",
-              loginPassword: ""
-            });
-          }
+        if (res.data.length > 0) {
+          swal("Berhasil!", "Berhasil Login", "success");
+          this.props.onLoginUser(loginUsername);
+          this.setState({
+            isLoggedIn: true,
+            currentUsername: res.data[0].username,
+            loginUsername: "",
+            loginPassword: ""
+          });
+        } else {
+          swal("Gagal!", "User tidak ada atau password salah", "error");
         }
       })
       .catch(err => {
-        alert("User tidak ada atau password salah");
+        console.log(err);
       });
   };
 
@@ -63,7 +63,6 @@ class LoginScreen extends React.Component {
     if (!isLoggedIn) {
       return (
         <div>
-          {/* <h1>Auth Screen</h1> */}
           <center className="container">
             <div className="card p-5" style={{ width: "400px" }}>
               <h4>Login</h4>
@@ -97,4 +96,14 @@ class LoginScreen extends React.Component {
   }
 }
 
-export default LoginScreen;
+const mapsStateToProps = state => {
+  return {
+    userLogin: state.userLogin
+  };
+};
+
+const mapsDispatchToProps = {
+  onLoginUser: usernameHandler
+};
+
+export default connect(mapsStateToProps, mapsDispatchToProps)(LoginScreen);
