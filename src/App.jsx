@@ -22,6 +22,7 @@ import ProfileScreen from "./views/screens/ProfileScreen";
 import RegisterScreen from "./views/screens/RegisterScreen";
 import LoginScreen from "./views/screens/LoginScreen";
 import ProfileUser from "./views/screens/profileUser";
+import TodoReduxScreen from "./views/screens/TodoReduxScreen";
 
 function App() {
   let arrBooks = [
@@ -98,6 +99,7 @@ function App() {
         <Route exact path="/profileUser/:username" component={ProfileUser} />
         {/* setelah : adalah parameter yang bebas diisi apa aja */}
         <Route exact path="/profile/:username" component={ProfileScreen} />
+        <Route exact path="/todo" component={TodoReduxScreen} />
         {/* <Route path="/lifecycle" component={LifecycleScreen} /> */}
         {/* 
             user list
