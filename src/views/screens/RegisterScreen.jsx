@@ -4,6 +4,8 @@ import Axios from "axios";
 import { API_URL } from "../../constant/API";
 import { Spinner } from "reactstrap";
 import swal from "sweetalert";
+import { registerHandler } from "../../redux/actions";
+import { connect } from "react-redux";
 
 class RegisterScreen extends React.Component {
   state = {
@@ -32,51 +34,62 @@ class RegisterScreen extends React.Component {
       role
     } = this.state;
 
-    setTimeout(() => {
-      Axios.get(`${API_URL}/users`, {
-        params: {
-          username: username
-        }
-      })
-        .then(res => {
-          if (res.data.length == 0) {
-            if (password == repPassword) {
-              Axios.post(`${API_URL}/users`, {
-                username: username,
-                password: password,
-                role: role,
-                fullName: firstName + " " + lastName
-              })
-                .then(res => {
-                  swal("Berhasil", "Registrasi akun berhasil", "success");
-                  this.setState({ isLoading: false });
-                  this.setState({
-                    username: "",
-                    password: "",
-                    repPassword: "",
-                    role: "",
-                    firstName: "",
-                    lastName: ""
-                  });
-                })
-                .catch(err => {
-                  swal("Gagal", "Password yang dimasukkan tidak sama", "error");
-                  this.setState({ isLoading: false });
-                });
-            } else {
-              swal("Gagal", "Password yang dimasukkan tidak sama", "error");
-              this.setState({ isLoading: false });
-            }
-          } else {
-            swal("Gagal", `username ${username} telah digunakan`, "error");
-            this.setState({ isLoading: false });
-          }
-        })
-        .catch(err => {
-          swal("Gagal", `username ${username} telah digunakan`, "error");
-          this.setState({ isLoading: false });
-        });
-    }, 1000);
+    const userData = {
+      username,
+      password,
+      repPassword,
+      firstName,
+      lastName,
+      role
+    };
+
+    this.props.onRegister(userData);
+
+    // setTimeout(() => {
+    //   Axios.get(`${API_URL}/users`, {
+    //     params: {
+    //       username: username
+    //     }
+    //   })
+    //     .then(res => {
+    //       if (res.data.length == 0) {
+    //         if (password == repPassword) {
+    //           Axios.post(`${API_URL}/users`, {
+    //             username: username,
+    //             password: password,
+    //             role: role,
+    //             fullName: firstName + " " + lastName
+    //           })
+    //             .then(res => {
+    //               swal("Berhasil", "Registrasi akun berhasil", "success");
+    //               this.setState({ isLoading: false });
+    //               this.setState({
+    //                 username: "",
+    //                 password: "",
+    //                 repPassword: "",
+    //                 role: "",
+    //                 firstName: "",
+    //                 lastName: ""
+    //               });
+    //             })
+    //             .catch(err => {
+    //               swal("Gagal", "Password yang dimasukkan tidak sama", "error");
+    //               this.setState({ isLoading: false });
+    //             });
+    //         } else {
+    //           swal("Gagal", "Password yang dimasukkan tidak sama", "error");
+    //           this.setState({ isLoading: false });
+    //         }
+    //       } else {
+    //         swal("Gagal", `username ${username} telah digunakan`, "error");
+    //         this.setState({ isLoading: false });
+    //       }
+    //     })
+    //     .catch(err => {
+    //       swal("Gagal", `username ${username} telah digunakan`, "error");
+    //       this.setState({ isLoading: false });
+    //     });
+    // }, 1000);
   };
 
   render() {
@@ -152,4 +165,13 @@ class RegisterScreen extends React.Component {
   }
 }
 
-export default RegisterScreen;
+const mapsStateToProps = state => {
+  return {
+    user: state.user
+  };
+};
+const mapsDispatchToProps = {
+  onRegister: registerHandler
+};
+
+export default connect(mapsStateToProps, mapsDispatchToProps)(RegisterScreen);

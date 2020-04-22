@@ -44,3 +44,54 @@ export const loginHandler = userData => {
       });
   };
 };
+
+export const registerHandler = userData => {
+  return dispatch => {
+    const {
+      username,
+      password,
+      repPassword,
+      role,
+      firstName,
+      lastName
+    } = userData;
+
+    Axios.get(`${API_URL}/users`, {
+      params: {
+        username
+      }
+    })
+      .then(res => {
+        if (res.data.length == 0) {
+          if (password == repPassword) {
+            Axios.post(`${API_URL}/users`, {
+              username: username,
+              password: password,
+              role: role,
+              fullName: firstName + " " + lastName
+            })
+              .then(res => {
+                dispatch({
+                  type: "ON_REGISTER_SUCCESS",
+                  payload: res.data
+                });
+              })
+              .catch(err => {
+                dispatch({
+                  type: "ON_REGISTER_FAIL",
+                  payload: "Password tidak sesuai atau username telah digunakan"
+                });
+              });
+          }
+        } else {
+          dispatch({
+            type: "ON_REGISTER_FAIL",
+            payload: "Password tidak sesuai atau username telah digunakan"
+          });
+        }
+      })
+      .catch(err => {
+        console.log(err);
+      });
+  };
+};

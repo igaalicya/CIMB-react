@@ -71,6 +71,13 @@
       "role": "admin",
       "fullName": "Abigail Cantika",
       "id": 10
+    },
+    {
+      "username": "caca",
+      "password": "123",
+      "role": "admin",
+      "fullName": "cacaca cacaca",
+      "id": 11
     }
   ]
 }
