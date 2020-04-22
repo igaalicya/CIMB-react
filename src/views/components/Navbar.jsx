@@ -13,7 +13,7 @@ class Navbar extends React.Component {
           Login
         </Link>
         <Link className="navbar-brand text-white">
-          {this.props.userLogin.username}
+          {this.props.user.username}
         </Link>
       </div>
     );

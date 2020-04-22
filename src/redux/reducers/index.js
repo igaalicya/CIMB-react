@@ -1,10 +1,10 @@
 import { combineReducers } from "redux";
-import todo from "./todo";
-import user from "./user";
+import todoReducer from "./todo";
+import userReducer from "./user";
 import userLogin from "./userLogin";
 
 export default combineReducers({
-  haha: todo,
-  user,
+  todo: todoReducer,
+  user: userReducer,
   userLogin
 });

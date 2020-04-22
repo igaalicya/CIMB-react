@@ -1,5 +1,6 @@
 import React from "react";
 import { BrowserRouter, Route, Switch, withRouter } from "react-router-dom";
+import Cookie from "universal-cookie";
 
 import logo from "./logo.svg";
 import "./App.css";
@@ -24,8 +25,10 @@ import LoginScreen from "./views/screens/LoginScreen";
 import ProfileUser from "./views/screens/profileUser";
 import TodoReduxScreen from "./views/screens/TodoReduxScreen";
 
-function App() {
-  let arrBooks = [
+const cookieObject = new Cookie();
+
+class App extends React.Component {
+  arrBooks = [
     {
       author: "Margaret Atwood",
       title: "The handmaid's tale",
@@ -68,40 +71,41 @@ function App() {
     }
   ];
 
-  const renderBooks = () => {
-    return arrBooks.map(val => {
+  renderBooks = () => {
+    return this.arrBooks.map(val => {
       return <BooksData daftarBuku={val} />;
     });
   };
 
-  return (
-    // <div className="App">
-    //   <h1 className="p-5 font-weight-bolder text-primary">Toko Buku Purwadhika</h1>
-    //   <div className="row offset-md-1">
-    //       {renderBooks()}
-    //   </div>
-    //   <CounterScreen/>
-    //   <InputScreen/>
-    //   <AuthScreen/>
-    //   <LifecycleScreen/>
-    // </div>
-    <>
-      {/* yang diletakkan di dalam Browser Router akan muncul di semua screen */}
-      {/* <LifecycleScreen/> */}
-      <Navbar />
-      <Switch>
-        <Route exact path="/" component={HomeScreen} />
-        <Route exact path="/counter" component={CounterScreen} />
-        <Route exact path="/input" component={InputScreen} />
-        <Route exact path="/auth" component={AuthScreen} />
-        <Route exact path="/register" component={RegisterScreen} />
-        <Route exact path="/login" component={LoginScreen} />
-        <Route exact path="/profileUser/:username" component={ProfileUser} />
-        {/* setelah : adalah parameter yang bebas diisi apa aja */}
-        <Route exact path="/profile/:username" component={ProfileScreen} />
-        <Route exact path="/todo" component={TodoReduxScreen} />
-        {/* <Route path="/lifecycle" component={LifecycleScreen} /> */}
-        {/* 
+  render() {
+    return (
+      // <div className="App">
+      //   <h1 className="p-5 font-weight-bolder text-primary">Toko Buku Purwadhika</h1>
+      //   <div className="row offset-md-1">
+      //       {renderBooks()}
+      //   </div>
+      //   <CounterScreen/>
+      //   <InputScreen/>
+      //   <AuthScreen/>
+      //   <LifecycleScreen/>
+      // </div>
+      <>
+        {/* yang diletakkan di dalam Browser Router akan muncul di semua screen */}
+        {/* <LifecycleScreen/> */}
+        <Navbar />
+        <Switch>
+          <Route exact path="/" component={HomeScreen} />
+          <Route exact path="/counter" component={CounterScreen} />
+          <Route exact path="/input" component={InputScreen} />
+          <Route exact path="/auth" component={AuthScreen} />
+          <Route exact path="/register" component={RegisterScreen} />
+          <Route exact path="/login" component={LoginScreen} />
+          <Route exact path="/profileUser/:username" component={ProfileUser} />
+          {/* setelah : adalah parameter yang bebas diisi apa aja */}
+          <Route exact path="/profile/:username" component={ProfileScreen} />
+          <Route exact path="/todo" component={TodoReduxScreen} />
+          {/* <Route path="/lifecycle" component={LifecycleScreen} /> */}
+          {/* 
             user list
             login screen
               - get user sesuai username + password
@@ -117,10 +121,11 @@ function App() {
               - gunakan Lifecycle Method componentDidMount
               - tampilkan username, fullName, dan role user tsb
           */}
-        <Route path="*" component={PageNotFound} />
-      </Switch>
-    </>
-  );
+          <Route path="*" component={PageNotFound} />
+        </Switch>
+      </>
+    );
+  }
 }
 
 export default withRouter(App);

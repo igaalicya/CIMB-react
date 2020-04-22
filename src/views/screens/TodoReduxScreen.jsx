@@ -3,7 +3,8 @@ import { connect } from "react-redux";
 import {
   todoInputHandler,
   usernameInputHandler,
-  addTodoInputHandler
+  addTodoInputHandler,
+  loginHandler
 } from "../../redux/actions";
 
 class TodoReduxScreen extends React.Component {
@@ -11,7 +12,7 @@ class TodoReduxScreen extends React.Component {
     return (
       <div className="container">
         <h1>Todo Screen</h1>
-        <input
+        {/* <input
           type="text"
           className="form-control"
           placeholder="Input Todo Item"
@@ -25,7 +26,15 @@ class TodoReduxScreen extends React.Component {
         />
         {this.props.todo.todoList.map(val => {
           return <p>{val}</p>;
-        })}
+        })} */}
+        <p>Testing 1: {this.props.user.testing}</p>
+        <p>Testing 2: {this.props.user.testing2}</p>
+        <input
+          type="button"
+          value="Testing"
+          className="btn btn-primary"
+          onClick={this.props.onLogin}
+        />
       </div>
     );
   }
@@ -33,7 +42,7 @@ class TodoReduxScreen extends React.Component {
 
 const mapStateToProps = state => {
   return {
-    todo: state.haha,
+    todo: state.todo,
     user: state.user
   };
 };
@@ -43,7 +52,8 @@ const mapStateToProps = state => {
 const mapDispatchToProps = {
   onChangeTodo: todoInputHandler,
   onChangeUsername: usernameInputHandler,
-  addTodo: addTodoInputHandler
+  addTodo: addTodoInputHandler,
+  onLogin: loginHandler
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(TodoReduxScreen);
