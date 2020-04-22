@@ -82,6 +82,11 @@ export const registerHandler = userData => {
                   payload: "Password tidak sesuai atau username telah digunakan"
                 });
               });
+          } else {
+            dispatch({
+              type: "ON_REGISTER_FAIL",
+              payload: "Password tidak sesuai atau username telah digunakan"
+            });
           }
         } else {
           dispatch({
