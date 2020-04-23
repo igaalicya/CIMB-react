@@ -78,6 +78,20 @@
       "role": "admin",
       "fullName": "cacaca cacaca",
       "id": 11
+    },
+    {
+      "username": "siapa",
+      "password": "123",
+      "role": "admin",
+      "fullName": "siapa siapa",
+      "id": 12
+    },
+    {
+      "username": "coba",
+      "password": "coba",
+      "role": "coba",
+      "fullName": "coba coba",
+      "id": 13
     }
   ]
 }

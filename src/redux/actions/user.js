@@ -1,5 +1,6 @@
 import Axios from "axios";
 import { API_URL } from "../../constant/API";
+import user from "../reducers/user";
 
 export const usernameInputHandler = text => {
   return {
@@ -98,5 +99,38 @@ export const registerHandler = userData => {
       .catch(err => {
         console.log(err);
       });
+  };
+};
+
+export const userKeepLogin = userData => {
+  return dispatch => {
+    Axios.get(`${API_URL}/users`, {
+      params: {
+        id: userData.id
+      }
+    })
+      .then(res => {
+        if (res.data.length > 0) {
+          dispatch({
+            type: "ON_LOGIN_SUCCESS",
+            payload: res.data[0]
+          });
+        } else {
+          dispatch({
+            type: "ON_LOGIN_FAIL",
+            payload: "Username atau password salah"
+          });
+        }
+      })
+      .catch(err => {
+        console.log(err);
+      });
+  };
+};
+
+export const logoutHandler = () => {
+  return {
+    type: "ON_LOGOUT",
+    payload: ""
   };
 };

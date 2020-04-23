@@ -6,6 +6,9 @@ import swal from "sweetalert";
 import { connect } from "react-redux";
 import { usernameHandler } from "../../redux/actions";
 import { loginHandler } from "../../redux/actions";
+import Cookie from "universal-cookie";
+
+const cookieObject = new Cookie();
 
 class LoginScreen extends React.Component {
   state = {
@@ -59,43 +62,49 @@ class LoginScreen extends React.Component {
     //   });
   };
 
+  componentDidUpdate() {
+    if (this.props.user.id) {
+      cookieObject.set("authData", JSON.stringify(this.props.user));
+    }
+  }
+
   render() {
     const { isLoggedIn, currentUsername, password, username } = this.state;
 
-    if (!isLoggedIn) {
-      return (
-        <div>
-          <center className="container">
-            <div className="card p-5" style={{ width: "400px" }}>
-              <h4>Login</h4>
-              <p>Username : {this.props.user.username}</p>
-              <input
-                value={username}
-                className="form-control mt-2"
-                type="text"
-                placeholder="Username"
-                onChange={e => this.inputHandler(e, "username")}
-              />
-              <input
-                value={password}
-                className="form-control mt-2"
-                type="text"
-                placeholder="Password"
-                onChange={e => this.inputHandler(e, "password")}
-              />
-              <input
-                type="button"
-                value="Login"
-                className="btn btn-primary mt-3"
-                onClick={this.loginHandler}
-              />
-            </div>
-          </center>
-        </div>
-      );
-    } else {
-      return <Redirect to={`/profileUser/${currentUsername}`} />;
-    }
+    // if (!this.props.user.username) {
+    return (
+      <div>
+        <center className="container">
+          <div className="card p-5" style={{ width: "400px" }}>
+            <h4>Login</h4>
+            <p>Username : {this.props.user.username}</p>
+            <input
+              value={username}
+              className="form-control mt-2"
+              type="text"
+              placeholder="Username"
+              onChange={e => this.inputHandler(e, "username")}
+            />
+            <input
+              value={password}
+              className="form-control mt-2"
+              type="text"
+              placeholder="Password"
+              onChange={e => this.inputHandler(e, "password")}
+            />
+            <input
+              type="button"
+              value="Login"
+              className="btn btn-primary mt-3"
+              onClick={this.loginHandler}
+            />
+          </div>
+        </center>
+      </div>
+    );
+    // } else {
+    //   return <Redirect to={`/profileUser/${this.props.user.username}`} />;
+    // }
   }
 }
 
