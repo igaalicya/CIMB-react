@@ -9,11 +9,11 @@ import { logoutHandler } from "../../redux/actions";
 const cookieObject = new Cookie();
 
 class Navbar extends React.Component {
-  onLogout = () => {
-    swal("Berhasil!", "Berhasil Logout", "success");
-    this.props.logoutHandler();
-    cookieObject.remove("authData");
-  };
+  // logoutHandler = () => {
+  //   swal("Berhasil!", "Berhasil Logout", "success");
+  //   this.props.logoutHandler();
+  //   cookieObject.remove("authData");
+  // };
 
   render() {
     return (
@@ -33,7 +33,7 @@ class Navbar extends React.Component {
         {this.props.user.username ? (
           <Link
             className="navbar-brand text-white font-weight-bold"
-            onClick={this.onLogout}
+            onClick={this.props.logoutHandler}
             to="/"
           >
             Logout

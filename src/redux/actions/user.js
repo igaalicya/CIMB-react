@@ -1,6 +1,9 @@
 import Axios from "axios";
 import { API_URL } from "../../constant/API";
 import user from "../reducers/user";
+import Cookie from "universal-cookie";
+
+const cookieObject = new Cookie();
 
 export const usernameInputHandler = text => {
   return {
@@ -129,8 +132,9 @@ export const userKeepLogin = userData => {
 };
 
 export const logoutHandler = () => {
+  // bisa ditaroh sini bisa ditaroh navbar
+  cookieObject.remove("authData");
   return {
-    type: "ON_LOGOUT",
-    payload: ""
+    type: "ON_LOGOUT"
   };
 };

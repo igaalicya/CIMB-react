@@ -23,8 +23,7 @@ export default (state = init_state, action) => {
   } else if (action.type == "ON_REGISTER_FAIL") {
     return { ...state, errMsg: action.payload };
   } else if (action.type == "ON_LOGOUT") {
-    const { username, fullName, role, id } = action.payload;
-    return { ...state, username, fullName, role, id };
+    return { ...init_state };
   } else {
     return { ...state };
   }
